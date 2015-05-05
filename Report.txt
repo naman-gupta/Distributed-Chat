@@ -1,0 +1,56 @@
+Distributed System – Assignment 2
+Roll no: 133050012 , 143050044
+
+Details of the files present in the assignment:
+
+1. ChatInterface.java
+		interface containing Remote methods 
+2. Message.java 
+		contains various information about the messages exchanged like srcId, destId , tag (Causal, Total , Leave) , actualMessage , unique messageId (clientId_UniqueRandomNumber) , causalDep (message id on which it is causally dependent) , propSeqno (Sequence Number associated with this message so far) , status (Deliverable or undeliverable to final queue in total ordering)
+		
+3. CausalMessage.java
+		For Causal Message Delivery, contains the object of message class and its associated Matrix so far.
+		
+4. Helper.java
+		contains utility functions
+		
+5. ConnectionHandler.java
+		contains multicasting connection handling on port 9999
+		
+6. DistributedChat.java
+		contains the main logic of implementing causal and total ordering Algorithm (ISIS) and handles the distributed Chat.
+		
+
+
+Setup:
+	1. Copy all java files to different machines.
+	2. Make sure that systems are connected via ETHERNET cable (no wifi) and should be in same subnet.
+	3. IMPORTANT : Make sure that /etc/hosts file contains the actual IPAdrress of the system and not 127.0.1.1. This IpAddress is written in front of computer name. For Example (127.0.1.1 naman). If this is so replace 127.0.1.1 with the Ethernet Address of the system. You can get Ethernet Address by using ifconfig command.
+	4. We assume that maximum number of process can be 100.
+	5. We are creating RMI Registry on PORT 1098. If that port is pre-occupied by some other process then make a change in
+		5.1 ConnectionHandler.java, replace variable  REGISTRY_PORT
+		5.2 DistributedChat.java, replace variable  REGISTRY_PORT
+
+How to Compile and run:
+
+1. In the folder containing all the assignment files , type the following commands:
+		$> javac *.java
+		$> java DistributedChat <ClientId>
+			for example: $> java DistributedChat 1
+			Note: The value of ClientId entered on different terminals should be different and should be between 0-99
+		Following Console will be displayed
+		Enter Command 
+		 1. Control Join 
+		 2. Control Leave 
+		 3. Reply to Client 
+		 4. Reply to Everyone 
+ 		 Enter your choice
+
+Testing :
+1. For Control Join : Press 1
+2. For Control Leave : Press 2 
+3. ReplyTo : Press 3 --> [Enter]--> and then followed by message in the form <clientId Message>. Example "2 How are you?"(Quotes are not be entered).
+4. ReplyAll : Press 4 -->[Enter]--> Enter the message to be multicasted within the group.
+
+
+  
